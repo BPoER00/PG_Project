@@ -1,9 +1,7 @@
-import React from 'react'
+import Escaneo from "./Escaneo/page.js";
 
 function page() {
-  return (
-    <div>pages</div>
-  )
+  return <div>index</div>;
 }
 
-export default page
+export default page;
