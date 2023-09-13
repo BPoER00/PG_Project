@@ -1,9 +1,12 @@
-import LoginProvider from "@/context/Login.Context.js"
+import LoginProvider from "@/context/Login.Context.js";
+import LoginForm from "@/components/Login/LoginForm";
 
 function page() {
   return (
-    <LoginProvider>page</LoginProvider>
-  )
+    <LoginProvider>
+      <LoginForm />
+    </LoginProvider>
+  );
 }
 
-export default page
+export default page;
