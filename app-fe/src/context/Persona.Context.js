@@ -4,7 +4,7 @@ import { createContext, useContext, useState } from "react";
 const PersonaContext = createContext();
 
 export const usePersona = () => {
-  const context = useContext(FamiliaContext);
+  const context = useContext(PersonaContext);
   if (!context) throw new Error("usePersona must used within a provider");
   return context;
 };
