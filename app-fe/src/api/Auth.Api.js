@@ -3,7 +3,7 @@ import config from "@/config/props.js";
 import { postCookie } from "@/config/cookiesconfig.js";
 
 const AuthApi = axios.create({
-  baseURL: `${config.URL_API}/auth`,
+  baseURL: config.URL_API + "/auth",
   headers: {
     "Content-Type": "application/json",
   },
