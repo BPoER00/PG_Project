@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ValidateLogin } from "@/validations/Login.Validate.js";
+import { ValidatePersona } from "@/validations/Persona.Validate.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -9,7 +9,7 @@ import InputText from "@/components/Inputs/InputText.js";
 import InputSelect from "@/components/Inputs/InputSelect.js";
 
 function PersonaNew() {
-  const { auto, componente, insert, changePage } = usePersona();
+  const { familia, tipoDocumento, insert, changePage } = usePersona();
 
   const sleep = (ms) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -21,13 +21,13 @@ function PersonaNew() {
     formState: { errors },
     control,
   } = useForm({
-    resolver: yupResolver(ValidateLogin),
+    resolver: yupResolver(ValidatePersona),
   });
 
   const onSubmit = async (e) => {
     const res = await insert(e);
     if (res.status === 204) {
-      toast.success("Revision Realizada Correctamente");
+      toast.success("Persona Ingresada Correctamente");
       await sleep(3000);
       changePage(1);
     } else if (res.status === 400 || res.status === 401) {
@@ -44,61 +44,53 @@ function PersonaNew() {
             className="w-full h-auto bg-gray-400 hidden lg:block lg:w-5/12 bg-cover rounded-l-lg"
             style={{
               backgroundImage:
-                "url('https://imgs.search.brave.com/GNvxfR-D5JNgE_zP9GjGW4ywIi27ynlGC5CWlIZigb0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9zdC5k/ZXBvc2l0cGhvdG9z/LmNvbS8xMDA3Mjgz/LzQ2MzUvaS82MDAv/ZGVwb3NpdHBob3Rv/c180NjM1NTQzNS1z/dG9jay1waG90by1y/ZXZpc2lvbi5qcGc')",
+                "url('https://cdn.republica.gt/102021/1635540713169.jpeg?&cw=600&ch=365')",
             }}
           ></div>
-          <div className="w-full lg:w-7/12 dark:bg-gray-800 p-5 rounded-lg lg:rounded-l-none">
-            <h3 className="pt-4 text-2xl text-center">Revision!</h3>
+          <div className="w-full lg:w-7/12 dark:bg-gray-400 p-5 rounded-lg lg:rounded-l-none">
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="px-8 pt-6 pb-8 mb-4 dark:bg-gray-900 rounded"
             >
               <div className="mb-4">
                 <InputSelect
-                  label={"Auto"}
-                  name={"auto"}
-                  options={auto}
+                  label={"Tipo Documento"}
+                  name={"tipoDocumento_id"}
+                  options={tipoDocumento}
                   control={control}
-                  placeholder={"Ingrese auto..."}
-                  errors={errors.auto?.message}
+                  placeholder={"Ingrese tipo documento..."}
+                  errors={errors.tipoDocumento_id?.message}
                 />
               </div>
+
               <div className="mb-4">
                 <InputSelect
-                  label={"Componente"}
-                  name={"componente"}
-                  options={componente}
+                  label={"Familia"}
+                  name={"familia_id"}
+                  options={familia}
                   control={control}
-                  placeholder={"Ingrese componente..."}
-                  errors={errors.componente?.message}
+                  placeholder={"Ingrese familia..."}
+                  errors={errors.familia_id?.message}
                 />
               </div>
+
               <div className="mb-4">
                 <InputText
-                  label={"Descripcion"}
-                  name={"descripcion"}
+                  label={"Codigo Identificacion"}
+                  name={"codigoIdentificacion"}
                   type={"text"}
-                  placeholder={"Ingrese descripcion..."}
+                  placeholder={"Ingrese codigo..."}
                   register={register}
-                  errors={errors.descripcion?.message}
+                  errors={errors.codigoIdentificacion?.message}
                 />
               </div>
-              <div className="mb-4">
-                <InputText
-                  label={"Estatus"}
-                  name={"status"}
-                  type={"number"}
-                  placeholder={"Ingrese estatus..."}
-                  register={register}
-                  errors={errors.status?.message}
-                />
-              </div>
+
               <div className="mb-6 text-center">
                 <button
                   className="w-full mt-3 px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
                   type="submit"
                 >
-                  Registrar Revision
+                  Registrar Persona
                 </button>
               </div>
               <hr className="mb-6 border-t" />

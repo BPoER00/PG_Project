@@ -19,7 +19,7 @@ function InputSelect({ label, name, options, control, errors, ...rest }) {
       </label>
       <Select
         placeholder="Search Here..."
-        className="text-gray-800 dark:text-gray-200 placeholder-gray-400 w-full py-2.5 mt-2 text-base transition duration-500 ring-gray-400"
+        className="text-gray-800 dark:text-gray-800 placeholder-gray-400 w-full py-2.5 mt-2 text-base transition duration-500 ring-gray-400"
         options={options}
         value={
           options ? options.find((option) => option.value === value) : null

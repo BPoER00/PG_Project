@@ -6,7 +6,7 @@ import ContenidoTabla from "./ContenidoTabla.js";
 import { usePersona } from "@/context/Persona.Context.js";
 
 function RevisionList() {
-  const { revision } = usePersona();
+  const { personas } = usePersona();
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -14,10 +14,15 @@ function RevisionList() {
   }, []);
 
   const info = async () => {
-    setData(await revision());
+    setData(await personas());
   };
 
-  const cabeceras = ["Auto", "Cantidad De Revisiones", "Opciones"];
+  const cabeceras = [
+    "Numero Identificacion",
+    "Familia",
+    "Tipo Documento",
+    "Opciones",
+  ];
   if (data.length === 0) {
     return (
       <>
@@ -37,7 +42,7 @@ function RevisionList() {
   }
 
   return (
-    <CardComponentsAll>
+    <CardAll>
       <div className="w-full max-h-[55vh] overflow-auto">
         {data.length === 0 ? (
           <LoadingBar />
@@ -47,7 +52,7 @@ function RevisionList() {
           </TableData>
         )}
       </div>
-    </CardComponentsAll>
+    </CardAll>
   );
 }
 

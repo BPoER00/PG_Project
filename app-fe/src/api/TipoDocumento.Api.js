@@ -1,9 +1,9 @@
 import axios from "axios";
-import config from "@/config/props.js";
+import { URL_API } from "@/config/props.js";
 import { getCookie } from "@/config/cookiesconfig.js";
 
 const DocumentoApi = axios.create({
-  baseURL: `${config.URL_API}/documento`,
+  baseURL: `${URL_API}/documento`,
   headers: {
     "Content-Type": "application/json",
     "x-access-token": getCookie(),
@@ -11,7 +11,7 @@ const DocumentoApi = axios.create({
 });
 
 export const get = async () => {
-  const res = await DocumentoApi.get('/')
+  const res = await DocumentoApi.get("/")
     .then((response) => {
       return response.data.data;
     })
