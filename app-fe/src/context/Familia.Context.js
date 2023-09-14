@@ -1,5 +1,6 @@
 "use client";
 import { createContext, useContext, useState } from "react";
+import { get, post } from "@/api/Familia.Api";
 
 const FamiliaContext = createContext();
 
@@ -26,8 +27,20 @@ function FamiliaProvider({ children }) {
     );
   };
 
+  const familias = async () => {
+    const familia = await get()
+      .then((data) => {
+        return data;
+      })
+      .catch((error) => error);
+
+    return familia;
+  };
+
+  const insert = async (familia) => post(familia);
+
   return (
-    <FamiliaContext.Provider value={{ paginate, changePage }}>
+    <FamiliaContext.Provider value={{ familias, insert, paginate, changePage }}>
       {children}
     </FamiliaContext.Provider>
   );

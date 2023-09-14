@@ -1,15 +1,14 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ValidateLogin } from "@/validations/Login.Validate.js";
+import { ValidateFamilia } from "@/validations/Familia.Validate.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { useFamilia } from "@/context/Familia.Context.js";
 import InputText from "@/components/Inputs/InputText.js";
-import InputSelect from "@/components/Inputs/InputSelect.js";
 
 function RevisionNew() {
-  const { auto, componente, insert, changePage } = useFamilia();
+  const { insert, changePage } = useFamilia();
 
   const sleep = (ms) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -19,9 +18,8 @@ function RevisionNew() {
     register,
     handleSubmit,
     formState: { errors },
-    control,
   } = useForm({
-    resolver: yupResolver(ValidateLogin),
+    resolver: yupResolver(ValidateFamilia),
   });
 
   const onSubmit = async (e) => {
@@ -47,50 +45,29 @@ function RevisionNew() {
                 "url('https://imgs.search.brave.com/GNvxfR-D5JNgE_zP9GjGW4ywIi27ynlGC5CWlIZigb0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9zdC5k/ZXBvc2l0cGhvdG9z/LmNvbS8xMDA3Mjgz/LzQ2MzUvaS82MDAv/ZGVwb3NpdHBob3Rv/c180NjM1NTQzNS1z/dG9jay1waG90by1y/ZXZpc2lvbi5qcGc')",
             }}
           ></div>
-          <div className="w-full lg:w-7/12 dark:bg-gray-800 p-5 rounded-lg lg:rounded-l-none">
-            <h3 className="pt-4 text-2xl text-center">Revision!</h3>
+          <div className="w-full lg:w-7/12 dark:bg-gray-400 p-5 rounded-lg lg:rounded-l-none">
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="px-8 pt-6 pb-8 mb-4 dark:bg-gray-900 rounded"
             >
               <div className="mb-4">
-                <InputSelect
-                  label={"Auto"}
-                  name={"auto"}
-                  options={auto}
-                  control={control}
-                  placeholder={"Ingrese auto..."}
-                  errors={errors.auto?.message}
-                />
-              </div>
-              <div className="mb-4">
-                <InputSelect
-                  label={"Componente"}
-                  name={"componente"}
-                  options={componente}
-                  control={control}
-                  placeholder={"Ingrese componente..."}
-                  errors={errors.componente?.message}
-                />
-              </div>
-              <div className="mb-4">
                 <InputText
-                  label={"Descripcion"}
-                  name={"descripcion"}
+                  label={"Nombre Familia"}
+                  name={"nombre"}
                   type={"text"}
-                  placeholder={"Ingrese descripcion..."}
+                  placeholder={"Ingrese nombre familia..."}
                   register={register}
-                  errors={errors.descripcion?.message}
+                  errors={errors.nombre?.message}
                 />
               </div>
               <div className="mb-4">
                 <InputText
-                  label={"Estatus"}
-                  name={"status"}
-                  type={"number"}
-                  placeholder={"Ingrese estatus..."}
+                  label={"Password"}
+                  name={"password"}
+                  type={"password"}
+                  placeholder={"Ingrese password..."}
                   register={register}
-                  errors={errors.status?.message}
+                  errors={errors.password?.message}
                 />
               </div>
               <div className="mb-6 text-center">
@@ -98,7 +75,7 @@ function RevisionNew() {
                   className="w-full mt-3 px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
                   type="submit"
                 >
-                  Registrar Revision
+                  Registrar Familia 
                 </button>
               </div>
               <hr className="mb-6 border-t" />
