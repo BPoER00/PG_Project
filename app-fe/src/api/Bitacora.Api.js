@@ -1,9 +1,9 @@
 import axios from "axios";
-import config from "@/config/props.js";
+import { URL_API } from "@/config/props.js";
 import { getCookie } from "@/config/cookiesconfig.js";
 
 const BitacoraApi = axios.create({
-  baseURL: `${config.URL_API}/bitacora`,
+  baseURL: `${URL_API}/bitacora`,
   headers: {
     "Content-Type": "application/json",
     "x-access-token": getCookie(),
