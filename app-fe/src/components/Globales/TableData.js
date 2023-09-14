@@ -15,10 +15,10 @@ function TableData({ children, cabecera }) {
           <div className="inline-block min-w-full align-middle">
             <div className="overflow-hidden ">
               <table className="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700">
-                <thead className="bg-gray-100 dark:bg-gray-700">
+                <thead className="bg-gray-100 dark:bg-gray-200">
                   <tr>{elementosCabecera}</tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+                <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-200">
                   {children}
                 </tbody>
               </table>

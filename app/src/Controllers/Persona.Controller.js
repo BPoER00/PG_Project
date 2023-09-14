@@ -2,6 +2,8 @@ import Persona from "../Models/Persona.js";
 
 export const get = async (req, res) => {
   await Persona.find()
+    .populate("familia_id", "nombre")
+    .populate("tipoDocumento_id", "nombre")
     .then((data) => {
       res.status(200).json({
         data: data,
@@ -28,10 +30,7 @@ export const post = async (req, res) => {
   await personaNew
     .save()
     .then((data) => {
-      res.status(201).json({
-        data: data,
-        message: "Dato Creado Correctamente",
-      });
+      res.status(204).send();
     })
     .catch((error) => {
       res.status(500).json({

@@ -5,8 +5,8 @@ import TableData from "../Globales/TableData.js";
 import ContenidoTabla from "./ContenidoTabla.js";
 import { useFamilia } from "@/context/Familia.Context.js";
 
-function RevisionList() {
-  const { revision } = useFamilia();
+function FamiliaList() {
+  const { familias } = useFamilia();
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -14,10 +14,12 @@ function RevisionList() {
   }, []);
 
   const info = async () => {
-    setData(await revision());
+    setData(await familias());
   };
 
-  const cabeceras = ["Auto", "Cantidad De Revisiones", "Opciones"];
+  console.log(data);
+
+  const cabeceras = ["Persona", "Opciones"];
   if (data.length === 0) {
     return (
       <>
@@ -37,7 +39,7 @@ function RevisionList() {
   }
 
   return (
-    <CardComponentsAll>
+    <CardAll>
       <div className="w-full max-h-[55vh] overflow-auto">
         {data.length === 0 ? (
           <LoadingBar />
@@ -47,8 +49,8 @@ function RevisionList() {
           </TableData>
         )}
       </div>
-    </CardComponentsAll>
+    </CardAll>
   );
 }
 
-export default RevisionList;
+export default FamiliaList;

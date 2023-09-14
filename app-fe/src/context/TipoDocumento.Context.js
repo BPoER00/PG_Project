@@ -1,5 +1,6 @@
 "use client";
 import { createContext, useContext, useState } from "react";
+import { get, post } from "@/api/TipoDocumento.Api";
 
 const TipoDocumentoContext = createContext();
 
@@ -26,8 +27,19 @@ function TipoDocumentoProvider({ children }) {
     );
   };
 
+  const tipoDocumentos = async () => {
+    const tipoDocumento = await get()
+      .then((data) => {
+        return data;
+      })
+      .catch((error) => error);
+
+    return tipoDocumento;
+  };
+
+  const insert = async (tipoDocumento) => post(tipoDocumento);
   return (
-    <TipoDocumentoContext.Provider value={{ paginate, changePage }}>
+    <TipoDocumentoContext.Provider value={{ insert, tipoDocumentos, paginate, changePage }}>
       {children}
     </TipoDocumentoContext.Provider>
   );

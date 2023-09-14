@@ -5,7 +5,9 @@ export const checkPersonaExisted = async (req, res, next) => {
     const personaObtenida = req.body.persona_id;
     const validation = [];
 
-    const resultado = await Persona.findOne({ codigoIdentificacion: personaObtenida });
+    const resultado = await Persona.findOne({
+      codigoIdentificacion: personaObtenida,
+    });
     if (resultado === null) {
       validation.push(`Persona: ${personaObtenida} no existe`);
     }

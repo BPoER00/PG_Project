@@ -6,7 +6,7 @@ import ContenidoTabla from "./ContenidoTabla.js";
 import { useTipoDocumento } from "@/context/TipoDocumento.Context.js";
 
 function RevisionList() {
-  const { revision } = useTipoDocumento();
+  const { tipoDocumentos } = useTipoDocumento();
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -14,10 +14,10 @@ function RevisionList() {
   }, []);
 
   const info = async () => {
-    setData(await revision());
+    setData(await tipoDocumentos());
   };
 
-  const cabeceras = ["Auto", "Cantidad De Revisiones", "Opciones"];
+  const cabeceras = ["Tipo Documento", "Opciones"];
   if (data.length === 0) {
     return (
       <>
@@ -37,7 +37,7 @@ function RevisionList() {
   }
 
   return (
-    <CardComponentsAll>
+    <CardAll>
       <div className="w-full max-h-[55vh] overflow-auto">
         {data.length === 0 ? (
           <LoadingBar />
@@ -47,7 +47,7 @@ function RevisionList() {
           </TableData>
         )}
       </div>
-    </CardComponentsAll>
+    </CardAll>
   );
 }
 

@@ -1,19 +1,20 @@
 "use client";
 import { createContext, useContext } from "react";
+import { post } from "@/api/Bitacora.Api.js";
 
 const EscaneoContext = createContext();
 
 export const useEscaneo = () => {
   const context = useContext(EscaneoContext);
-  if (!context)
-    throw new Error("useEscaneo must used within a provider");
+  if (!context) throw new Error("useEscaneo must used within a provider");
   return context;
 };
 
 function EscaneoProvider({ children }) {
+  const insert = async (bitacora) => post(bitacora);
 
   return (
-    <EscaneoContext.Provider value={{}}>
+    <EscaneoContext.Provider value={{ insert }}>
       {children}
     </EscaneoContext.Provider>
   );

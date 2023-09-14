@@ -1,9 +1,9 @@
 import axios from "axios";
-import config from "@/config/props.js";
+import { URL_API } from "@/config/props.js";
 import { getCookie } from "@/config/cookiesconfig.js";
 
 const PersonaApi = axios.create({
-  baseURL: `${config.URL_API}/persona`,
+  baseURL: `${URL_API}/persona`,
   headers: {
     "Content-Type": "application/json",
     "x-access-token": getCookie(),
@@ -11,7 +11,7 @@ const PersonaApi = axios.create({
 });
 
 export const get = async (params) => {
-  const res = await PersonaApi.get('/')
+  const res = await PersonaApi.get("/")
     .then((response) => {
       return response.data.data;
     })

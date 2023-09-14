@@ -1,8 +1,10 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
 import { createWorker } from "tesseract.js";
+import { useEscaneo } from "@/context/Escaneo.Context";
 
 const ParteEscaneo = () => {
+  const { insert } = useEscaneo();
   const videoRef = useRef(null);
   const [imageData, setImageData] = useState(null);
   const [ocrText, setOcrText] = useState("");
@@ -27,9 +29,9 @@ const ParteEscaneo = () => {
         takePhoto();
       }
     };
-    
+
     initializeTesseract();
-    
+
     // Agregar el evento de escucha de teclado al documento
     document.addEventListener("keydown", handleKeyDown);
 
@@ -37,7 +39,6 @@ const ParteEscaneo = () => {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-    
   }, []);
 
   const startCamera = async () => {
@@ -76,6 +77,7 @@ const ParteEscaneo = () => {
       const numbersString = extractedNumbers ? extractedNumbers.join("") : "";
 
       setOcrText(numbersString);
+      insert({ persona_id: numbersString });
     }
   };
 

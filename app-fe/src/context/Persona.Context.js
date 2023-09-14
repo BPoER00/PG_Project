@@ -1,5 +1,8 @@
 "use client";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { get as getFamilia } from "@/api/Familia.Api.js";
+import { get as getTipoDocumento } from "@/api/TipoDocumento.Api.js";
+import { get as getPersona, post } from "@/api/Persona.Api.js";
 
 const PersonaContext = createContext();
 
@@ -16,6 +19,17 @@ function PersonaProvider({ children }) {
   ];
 
   const [paginate, setPaginate] = useState(defaultPaginate);
+  const [familia, setFamilia] = useState();
+  const [tipoDocumento, setTipoDocumento] = useState();
+
+  useEffect(() => {
+    getFamilia().then((data) =>
+      setFamilia(data.map((m) => ({ value: m._id, label: m.nombre })))
+    );
+    getTipoDocumento().then((data) =>
+      setTipoDocumento(data.map((m) => ({ value: m._id, label: m.nombre })))
+    );
+  }, []);
 
   const changePage = (id) => {
     setPaginate((prevPaginate) =>
@@ -26,8 +40,23 @@ function PersonaProvider({ children }) {
     );
   };
 
+  const personas = async () => {
+    const persona = await getPersona()
+      .then((data) => {
+        return data;
+      })
+      .catch((error) => error);
+
+    return persona;
+  };
+
+  const insert = async (persona) => post(persona);
+
+
   return (
-    <PersonaContext.Provider value={{ paginate, changePage }}>
+    <PersonaContext.Provider
+      value={{ insert, personas, familia, tipoDocumento, paginate, changePage }}
+    >
       {children}
     </PersonaContext.Provider>
   );

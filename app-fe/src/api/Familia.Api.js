@@ -1,9 +1,9 @@
 import axios from "axios";
-import config from "@/config/props.js";
+import { URL_API } from "@/config/props.js";
 import { getCookie } from "@/config/cookiesconfig.js";
 
 const FamiliaApi = axios.create({
-  baseURL: `${config.URL_API}/familia`,
+  baseURL: `${URL_API}/familia`,
   headers: {
     "Content-Type": "application/json",
     "x-access-token": getCookie(),
@@ -11,7 +11,7 @@ const FamiliaApi = axios.create({
 });
 
 export const get = async (params) => {
-  const res = await FamiliaApi.get(`/${params}`)
+  const res = await FamiliaApi.get("/")
     .then((response) => {
       return response.data.data;
     })
