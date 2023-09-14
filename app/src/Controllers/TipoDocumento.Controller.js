@@ -26,10 +26,7 @@ export const post = async (req, res) => {
   await tipoDocumentoNew
     .save()
     .then((data) => {
-      res.status(201).json({
-        data: data,
-        message: "Dato Creado Correctamente",
-      });
+      res.status(204).send();
     })
     .catch((error) => {
       res.status(500).json({
