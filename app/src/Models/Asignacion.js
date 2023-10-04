@@ -1,15 +1,21 @@
 import { Schema, model } from "mongoose";
 
-const personaSchema = new Schema(
+const asignacionSchema = new Schema(
   {
-    nombre: {
+    codigoIdentificacion: {
       type: String,
       required: true,
       unique: true,
     },
-    familia_id: [
+    persona_id: [
       {
-        ref: "Familia",
+        ref: "Persona",
+        type: Schema.Types.ObjectId,
+      },
+    ],
+    tipoDocumento_id: [
+      {
+        ref: "TipoDocumento",
         type: Schema.Types.ObjectId,
       },
     ],
@@ -24,4 +30,4 @@ const personaSchema = new Schema(
   }
 );
 
-export default model("Persona", personaSchema);
+export default model("Asignacion", asignacionSchema);

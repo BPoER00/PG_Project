@@ -1,8 +1,9 @@
-import Persona from "../Models/Persona.js";
+import Asignacion from "../Models/Asignacion.js";
 
 export const get = async (req, res) => {
-  await Persona.find()
-    .populate("familia_id", "nombre")
+  await Asignacion.find()
+    .populate("persona_id", "nombre")
+    .populate("tipoDocumento_id", "nombre")
     .then((data) => {
       res.status(200).json({
         data: data,
@@ -18,14 +19,15 @@ export const get = async (req, res) => {
 };
 
 export const post = async (req, res) => {
-  const { nombre, familia_id } = req.body;
+  const { codigoIdentificacion, persona_id, tipoDocumento_id } = req.body;
 
-  const personaNew = Persona({
-    nombre,
-    familia_id,
+  const asignacionNew = Persona({
+    codigoIdentificacion,
+    persona_id,
+    tipoDocumento_id,
   });
 
-  await personaNew
+  await asignacionNew
     .save()
     .then((data) => {
       res.status(204).send();
@@ -41,10 +43,10 @@ export const post = async (req, res) => {
 export const deleted = async (req, res) => {
   const { id } = req.params;
 
-  const persona = await Persona.findById(id);
-  persona.estado = false;
+  const asignacion = await Asignacion.findById(id);
+  asignacion.estado = false;
 
-  await persona
+  await asignacion
     .save()
     .then((data) => {
       res.status(201).json({
