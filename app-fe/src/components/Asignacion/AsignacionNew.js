@@ -1,15 +1,15 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ValidatePersona } from "@/validations/Persona.Validate.js";
+import { ValidateAsignacion } from "@/validations/Persona.Validate.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { usePersona } from "@/context/Persona.Context.js";
 import InputText from "@/components/Inputs/InputText.js";
 import InputSelect from "@/components/Inputs/InputSelect.js";
+import { useAsignacion } from "@/context/Asignacion.Context.js";
 
 function PersonaNew() {
-  const { familia, tipoDocumento, insert, changePage } = usePersona();
+  const { familia, tipoDocumento, insert, changePage } = useAsignacion();
 
   const sleep = (ms) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -21,7 +21,7 @@ function PersonaNew() {
     formState: { errors },
     control,
   } = useForm({
-    resolver: yupResolver(ValidatePersona),
+    resolver: yupResolver(ValidateAsignacion),
   });
 
   const onSubmit = async (e) => {
@@ -53,13 +53,35 @@ function PersonaNew() {
               className="px-8 pt-6 pb-8 mb-4 dark:bg-gray-900 rounded"
             >
               <div className="mb-4">
+                <InputSelect
+                  label={"Tipo Documento"}
+                  name={"tipoDocumento_id"}
+                  options={tipoDocumento}
+                  control={control}
+                  placeholder={"Ingrese tipo documento..."}
+                  errors={errors.tipoDocumento_id?.message}
+                />
+              </div>
+
+              <div className="mb-4">
+                <InputSelect
+                  label={"Persona"}
+                  name={"persona_id"}
+                  options={familia}
+                  control={control}
+                  placeholder={"Ingrese Persona..."}
+                  errors={errors.persona_id?.message}
+                />
+              </div>
+
+              <div className="mb-4">
                 <InputText
-                  label={"Nombre"}
-                  name={"nombre"}
+                  label={"Codigo Identificacion"}
+                  name={"codigoIdentificacion"}
                   type={"text"}
-                  placeholder={"Ingrese nombre..."}
+                  placeholder={"Ingrese codigo..."}
                   register={register}
-                  errors={errors.nombre?.message}
+                  errors={errors.codigoIdentificacion?.message}
                 />
               </div>
 

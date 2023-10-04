@@ -76,6 +76,7 @@ const ParteEscaneo = () => {
       const extractedNumbers = text.match(/\d+/g);
       const numbersString = extractedNumbers ? extractedNumbers.join("") : "";
 
+      console.log(numbersString);
       setOcrText(numbersString);
       insert({ persona_id: numbersString });
     }
@@ -96,7 +97,6 @@ const ParteEscaneo = () => {
         Tomar Foto (tecla "t")
       </button>
       <div className="text-center">
-        <h2 className="text-2xl font-bold">Texto Extraído:</h2>
         <p className="text-lg">{ocrText}</p>
       </div>
       <video
