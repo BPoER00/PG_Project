@@ -1,5 +1,5 @@
 import BitacoraAcceso from "../Models/BitacoraAcceso.js";
-import Persona from "../Models/Persona.js";
+import Asignacion from "../Models/Asignacion.js";
 import dayjs from "dayjs";
 
 export const get = async (req, res) => {
@@ -24,7 +24,9 @@ export const post = async (req, res) => {
   if (!persona_id)
     return res.status(403).json({ message: "Persona No Ingresada" });
 
-  const persona = await Persona.find({ codigoIdentificacion: persona_id });
+  const asignacion = await Asignacion.find({
+    codigoIdentificacion: persona_id,
+  });
 
   const fechaHora = dayjs(new Date());
 
@@ -32,7 +34,7 @@ export const post = async (req, res) => {
   const hora = fechaHora.format("HH:mm:ss");
 
   const bitacoraNew = BitacoraAcceso({
-    persona_id: persona[0]._id,
+    persona_id: asignacion[0]._id,
     fecha,
     hora,
   });

@@ -2,6 +2,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import { createWorker } from "tesseract.js";
 import { useEscaneo } from "@/context/Escaneo.Context";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ParteEscaneo = () => {
   const { insert } = useEscaneo();
@@ -78,12 +80,24 @@ const ParteEscaneo = () => {
 
       console.log(numbersString);
       setOcrText(numbersString);
-      insert({ persona_id: numbersString });
+
+      const res = await insert({ persona_id: numbersString });
+      if (res.status === 201) {
+        toast.success("Acceso permitido");
+      } else if (
+        res.status === 400 ||
+        res.status === 401 ||
+        res.status === 403
+      ) {
+        toast.warning(`Acceso Denegado`);
+      }
     }
   };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+      <ToastContainer />
+
       <button
         onClick={startCamera}
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
@@ -96,9 +110,9 @@ const ParteEscaneo = () => {
       >
         Tomar Foto (tecla "t")
       </button>
-      <div className="text-center">
+      {/* <div className="text-center">
         <p className="text-lg">{ocrText}</p>
-      </div>
+      </div> */}
       <video
         ref={videoRef}
         autoPlay
