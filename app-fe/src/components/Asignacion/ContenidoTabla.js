@@ -7,7 +7,7 @@ function ContenidoTabla({ data }) {
             {d.codigoIdentificacion}
           </td>
           <td className="py-4 px-6 text-sm font-medium text-gray-400 whitespace-nowrap dark:text-white">
-            {d.familia_id[0].nombre}
+            {d.persona_id[0].nombre}
           </td>
           <td className="py-4 px-6 text-sm font-medium text-gray-400 whitespace-nowrap dark:text-white">
             {d.tipoDocumento_id[0].nombre}

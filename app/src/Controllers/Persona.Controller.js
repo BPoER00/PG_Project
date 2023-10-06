@@ -1,4 +1,5 @@
 import Persona from "../Models/Persona.js";
+import Usuario from "../Models/Usuario.js";
 
 export const get = async (req, res) => {
   await Persona.find()
@@ -20,9 +21,11 @@ export const get = async (req, res) => {
 export const post = async (req, res) => {
   const { nombre, familia_id } = req.body;
 
+  const resultado = await Usuario.findOne({ _id: familia_id });
+
   const personaNew = Persona({
     nombre,
-    familia_id,
+    familia_id: [resultado.familia_id[0]?.toString()],
   });
 
   await personaNew

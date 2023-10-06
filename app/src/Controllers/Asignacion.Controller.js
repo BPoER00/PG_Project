@@ -21,7 +21,7 @@ export const get = async (req, res) => {
 export const post = async (req, res) => {
   const { codigoIdentificacion, persona_id, tipoDocumento_id } = req.body;
 
-  const asignacionNew = Persona({
+  const asignacionNew = Asignacion({
     codigoIdentificacion,
     persona_id,
     tipoDocumento_id,

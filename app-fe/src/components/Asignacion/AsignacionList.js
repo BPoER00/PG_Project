@@ -6,7 +6,7 @@ import ContenidoTabla from "./ContenidoTabla.js";
 import { useAsignacion } from "@/context/Asignacion.Context.js";
 
 function RevisionList() {
-  const { personas } = useAsignacion();
+  const { asignaciones } = useAsignacion();
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ function RevisionList() {
   }, []);
 
   const info = async () => {
-    setData(await personas());
+    setData(await asignaciones());
   };
 
   const cabeceras = [
@@ -23,7 +23,8 @@ function RevisionList() {
     "Tipo Documento",
     "Opciones",
   ];
-  
+
+  console.log(data);
   if (data.length === 0) {
     return (
       <>

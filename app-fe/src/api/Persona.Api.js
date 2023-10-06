@@ -23,6 +23,7 @@ export const get = async (params) => {
 };
 
 export const post = async (data) => {
+  console.log(data);
   const res = await PersonaApi.post("/", data)
     .then((response) => {
       return response;

@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ValidateAsignacion } from "@/validations/Persona.Validate.js";
+import { ValidateAsignacion } from "@/validations/Asignacion.Validate.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -9,7 +9,7 @@ import InputSelect from "@/components/Inputs/InputSelect.js";
 import { useAsignacion } from "@/context/Asignacion.Context.js";
 
 function PersonaNew() {
-  const { familia, tipoDocumento, insert, changePage } = useAsignacion();
+  const { persona, tipoDocumento, insert, changePage } = useAsignacion();
 
   const sleep = (ms) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -67,7 +67,7 @@ function PersonaNew() {
                 <InputSelect
                   label={"Persona"}
                   name={"persona_id"}
-                  options={familia}
+                  options={persona}
                   control={control}
                   placeholder={"Ingrese Persona..."}
                   errors={errors.persona_id?.message}

@@ -1,7 +1,8 @@
 import { Router } from "express";
-import * as AsignacionController from "../Controllers/Persona.Controller.js";
+import * as AsignacionController from "../Controllers/Asignacion.Controller.js";
 import { verifyToken } from "../Middlewares/Authjwt.md.js";
 import {
+  checkAsignedExisted,
   checkPersonaExisted,
   checkTipoDocumentoExisted,
   checkDuplicateCodigoIdentificacion,
@@ -15,6 +16,7 @@ router.post(
   "/",
   [
     verifyToken,
+    checkAsignedExisted,
     checkDuplicateCodigoIdentificacion,
     checkPersonaExisted,
     checkTipoDocumentoExisted,

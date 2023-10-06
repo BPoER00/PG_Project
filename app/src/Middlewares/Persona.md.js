@@ -1,13 +1,12 @@
-import Familia from "../Models/Familia.js";
 import Persona from "../Models/Persona.js";
-import TipoDocumento from "../Models/TipoDocumento.js";
+import Usuario from "../Models/Usuario.js";
 
 export const checkFamiliaExisted = async (req, res, next) => {
   if (req.body.familia_id) {
     const familiaObtenida = req.body.familia_id;
     const validation = [];
 
-    const resultado = await Familia.findOne({ _id: familiaObtenida });
+    const resultado = await Usuario.findOne({ _id: familiaObtenida });
     if (resultado === null) {
       validation.push(`Familia: ${familiaObtenida} no existe`);
     }

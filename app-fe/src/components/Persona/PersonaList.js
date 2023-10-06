@@ -6,23 +6,19 @@ import ContenidoTabla from "./ContenidoTabla.js";
 import { usePersona } from "@/context/Persona.Context.js";
 
 function RevisionList() {
-  const { personas } = usePersona();
+  const { extractId, personas } = usePersona();
   const [data, setData] = useState([]);
 
   useEffect(() => {
     info();
+    extractId();
   }, []);
 
   const info = async () => {
     setData(await personas());
   };
 
-  const cabeceras = [
-    "Numero Identificacion",
-    "Familia",
-    "Tipo Documento",
-    "Opciones",
-  ];
+  const cabeceras = ["Nombre", "Opciones"];
   if (data.length === 0) {
     return (
       <>

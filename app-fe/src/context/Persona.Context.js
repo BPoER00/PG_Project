@@ -3,6 +3,9 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { get as getFamilia } from "@/api/Familia.Api.js";
 import { get as getTipoDocumento } from "@/api/TipoDocumento.Api.js";
 import { get as getPersona, post } from "@/api/Persona.Api.js";
+import { getCookie } from "@/config/cookiesconfig";
+import { jwtVerify } from "jose";
+import { SECRET_KEY } from "@/config/props";
 
 const PersonaContext = createContext();
 
@@ -50,12 +53,31 @@ function PersonaProvider({ children }) {
     return persona;
   };
 
-  const insert = async (persona) => post(persona);
+  const extractId = async () => {
+    const jwt = getCookie();
 
+    const { payload } = await jwtVerify(
+      jwt,
+      new TextEncoder().encode(SECRET_KEY)
+    );
+
+    return payload.id;
+  };
+
+  const insert = async (persona) =>
+    post({ nombre: persona.nombre, familia_id: await extractId() });
 
   return (
     <PersonaContext.Provider
-      value={{ insert, personas, familia, tipoDocumento, paginate, changePage }}
+      value={{
+        extractId,
+        insert,
+        personas,
+        familia,
+        tipoDocumento,
+        paginate,
+        changePage,
+      }}
     >
       {children}
     </PersonaContext.Provider>

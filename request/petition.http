@@ -1,0 +1,12 @@
+@api = http://192.168.1.66:3000/api
+
+@token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MGU0YTA0MzFlZTFkZTc3MTA4M2JlZiIsImlhdCI6MTY5NjQ4NzEwMiwiZXhwIjoxNjk2NTczNTAyfQ.4VT0zC_r6WyrTFHcH-5bf_owOq3UhnaI0W9Cm_4LqJc'
+
+POST {{api}}/familia 
+Content-Type: application/json
+x-access-token: {{token}}
+
+{
+    "nombre" : "Paz Navas",
+    "password" : "12341234"
+}
