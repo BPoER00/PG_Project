@@ -39,7 +39,13 @@ function Info() {
       <div className="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
         <div className="w-full max-h-[55vh] overflow-auto">
           {data.length === 0 ? (
-            <LoadingBar />
+            <div className="flex items-center justify-center">
+              <div className="col-span-12">
+                <div className="lg:overflow-visible">
+                  <p>No se encontraron datos</p>
+                </div>
+              </div>
+            </div>
           ) : (
             <TableData cabecera={cabeceras}>
               <ContenidoTabla data={data} />
