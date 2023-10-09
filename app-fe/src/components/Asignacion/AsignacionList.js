@@ -4,6 +4,7 @@ import LoadingBar from "../Inputs/LoadingBar.js";
 import TableData from "../Globales/TableData.js";
 import ContenidoTabla from "./ContenidoTabla.js";
 import { useAsignacion } from "@/context/Asignacion.Context.js";
+import ProgresBar from "../Inputs/ProgresBar.js";
 
 function RevisionList() {
   const { asignaciones } = useAsignacion();
@@ -24,7 +25,6 @@ function RevisionList() {
     "Opciones",
   ];
 
-  console.log(data);
   if (data.length === 0) {
     return (
       <>

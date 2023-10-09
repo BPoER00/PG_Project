@@ -47,12 +47,18 @@ function Info() {
               </div>
             </div>
           ) : (
-            <TableData cabecera={cabeceras}>
-              <ContenidoTabla data={data} />
-            </TableData>
+            <>
+              <TableData cabecera={cabeceras}>
+                <ContenidoTabla data={data} />
+              </TableData>
+
+              <CardMidComponent
+                nombre={"Grafica de Datos En Tabla"}
+                data={grafica}
+              />
+            </>
           )}
         </div>
-        <CardMidComponent nombre={"Grafica de Datos En Tabla"} data={grafica} />
       </div>
 
       <div className="mt-8 mx-4">
