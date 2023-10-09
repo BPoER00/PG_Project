@@ -1,9 +1,9 @@
-"use client";
 import React, { useRef, useState, useEffect } from "react";
 import { createWorker } from "tesseract.js";
 import { useEscaneo } from "@/context/Escaneo.Context";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
 
 const ParteEscaneo = () => {
   const { insert } = useEscaneo();
@@ -11,6 +11,8 @@ const ParteEscaneo = () => {
   const [imageData, setImageData] = useState(null);
   const [ocrText, setOcrText] = useState("");
   const [worker, setWorker] = useState(null);
+
+  const router = useRouter();
 
   useEffect(() => {
     const initializeTesseract = async () => {
@@ -120,6 +122,13 @@ const ParteEscaneo = () => {
         muted
         className="mt-4 border border-gray-300"
       ></video>
+      {/* Botón en la esquina superior izquierda */}
+      <button
+        onClick={() => router.push("/Login")}
+        className="fixed top-0 left-0 m-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Iniciar Sesión
+      </button>
     </div>
   );
 };

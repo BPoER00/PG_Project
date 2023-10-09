@@ -1,7 +1,8 @@
+"use client"
 import Escaneo from "./Escaneo/page.js";
 
 function page() {
-  return <div>index</div>;
+  return <Escaneo />;
 }
 
 export default page;

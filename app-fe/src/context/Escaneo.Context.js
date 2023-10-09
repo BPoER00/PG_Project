@@ -11,7 +11,7 @@ export const useEscaneo = () => {
 };
 
 function EscaneoProvider({ children }) {
-  const insert = async (bitacora) => post({ persona_id: "3360119891902" });
+  const insert = async (bitacora) => post(bitacora);
 
   return (
     <EscaneoContext.Provider value={{ insert }}>

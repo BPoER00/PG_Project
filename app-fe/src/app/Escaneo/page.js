@@ -1,3 +1,4 @@
+"use client"
 import EscaneoProvider from "@/context/Escaneo.Context.js";
 import ParteEscaneo from "@/components/Escaneo/ParteEscaneo.js";
 import { useEffect, useState } from "react";
