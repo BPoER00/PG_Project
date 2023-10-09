@@ -1,8 +1,10 @@
 import Persona from "../Models/Persona.js";
-import Usuario from "../Models/Usuario.js";
+import { ExtractIdToken } from "../Helpers/ExtractIdToken.js";
 
 export const get = async (req, res) => {
-  await Persona.find()
+  const familia_id = await ExtractIdToken(req.headers["x-access-token"]);
+
+  await Persona.find({ familia_id: familia_id })
     .populate("familia_id", "nombre")
     .then((data) => {
       res.status(200).json({
@@ -19,21 +21,22 @@ export const get = async (req, res) => {
 };
 
 export const post = async (req, res) => {
-  const { nombre, familia_id } = req.body;
+  const { nombre } = req.body;
 
-  const resultado = await Usuario.findOne({ _id: familia_id });
+  const familia_id = await ExtractIdToken(req.headers["x-access-token"]);
 
   const personaNew = Persona({
     nombre,
-    familia_id: [resultado.familia_id[0]?.toString()],
+    familia_id: familia_id,
   });
 
   await personaNew
     .save()
-    .then((data) => {
+    .then(() => {
       res.status(204).send();
     })
     .catch((error) => {
+      console.log(error.message);
       res.status(500).json({
         data: null,
         message: `Dato No Fue Creado Correctamente, Error: ${error.message}`,

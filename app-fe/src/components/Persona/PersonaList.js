@@ -6,12 +6,11 @@ import ContenidoTabla from "./ContenidoTabla.js";
 import { usePersona } from "@/context/Persona.Context.js";
 
 function RevisionList() {
-  const { extractId, personas } = usePersona();
+  const { personas } = usePersona();
   const [data, setData] = useState([]);
 
   useEffect(() => {
     info();
-    extractId();
   }, []);
 
   const info = async () => {

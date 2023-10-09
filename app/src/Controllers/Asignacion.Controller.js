@@ -1,7 +1,18 @@
+import mongoose from "mongoose";
 import Asignacion from "../Models/Asignacion.js";
+import Persona from "../Models/Persona.js";
+import { ExtractIdToken } from "../Helpers/ExtractIdToken.js";
 
 export const get = async (req, res) => {
-  await Asignacion.find()
+  const familia_id = await ExtractIdToken(req.headers["x-access-token"]);
+
+  const personas = await Persona.find({ familia_id: familia_id });
+
+  const personaIds = personas.map((persona) => persona._id);
+
+  await Asignacion.find({
+    persona_id: { $in: personaIds },
+  })
     .populate("persona_id", "nombre")
     .populate("tipoDocumento_id", "nombre")
     .then((data) => {

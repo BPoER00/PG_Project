@@ -10,8 +10,20 @@ const BitacoraApi = axios.create({
   },
 });
 
-export const get = async (params) => {
-  const res = await BitacoraApi.get(`/${params}`)
+export const get = async () => {
+  const res = await BitacoraApi.get("/")
+    .then((data) => {
+      return data.data.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+
+  return res;
+};
+
+export const getAsignacionesGroup = async () => {
+  const res = await BitacoraApi.get("/AsignacionesGroup")
     .then((data) => {
       return data.data.data;
     })
@@ -33,3 +45,4 @@ export const post = async (data) => {
 
   return res;
 };
+

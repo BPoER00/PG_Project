@@ -53,24 +53,11 @@ function PersonaProvider({ children }) {
     return persona;
   };
 
-  const extractId = async () => {
-    const jwt = getCookie();
-
-    const { payload } = await jwtVerify(
-      jwt,
-      new TextEncoder().encode(SECRET_KEY)
-    );
-
-    return payload.id;
-  };
-
-  const insert = async (persona) =>
-    post({ nombre: persona.nombre, familia_id: await extractId() });
+  const insert = async (persona) => post(persona);
 
   return (
     <PersonaContext.Provider
       value={{
-        extractId,
         insert,
         personas,
         familia,

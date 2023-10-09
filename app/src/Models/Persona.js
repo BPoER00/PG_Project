@@ -5,7 +5,6 @@ const personaSchema = new Schema(
     nombre: {
       type: String,
       required: true,
-      unique: true,
     },
     familia_id: [
       {
