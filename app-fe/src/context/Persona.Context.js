@@ -3,6 +3,9 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { get as getFamilia } from "@/api/Familia.Api.js";
 import { get as getTipoDocumento } from "@/api/TipoDocumento.Api.js";
 import { get as getPersona, post } from "@/api/Persona.Api.js";
+import { getCookie } from "@/config/cookiesconfig";
+import { jwtVerify } from "jose";
+import { SECRET_KEY } from "@/config/props";
 
 const PersonaContext = createContext();
 
@@ -52,10 +55,16 @@ function PersonaProvider({ children }) {
 
   const insert = async (persona) => post(persona);
 
-
   return (
     <PersonaContext.Provider
-      value={{ insert, personas, familia, tipoDocumento, paginate, changePage }}
+      value={{
+        insert,
+        personas,
+        familia,
+        tipoDocumento,
+        paginate,
+        changePage,
+      }}
     >
       {children}
     </PersonaContext.Provider>

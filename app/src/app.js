@@ -8,6 +8,7 @@ import BitacoraAccesoRoutes from "./Routes/BitacoraAcceso.Routes.js";
 import FamiliaRoutes from "./Routes/Familia.Routes.js";
 import PersonaRoutes from "./Routes/Persona.Routes.js";
 import TipoDocumentoRoutes from "./Routes/TipoDocumento.Routes.js";
+import AsignacionRoutes from "./Routes/Asignacion.Routes.js";
 
 const app = express();
 
@@ -42,6 +43,8 @@ app.use("/api/bitacora", BitacoraAccesoRoutes);
 app.use("/api/familia", FamiliaRoutes);
 
 app.use("/api/persona", PersonaRoutes);
+
+app.use("/api/asignacion", AsignacionRoutes);
 
 app.use("/api/documento", TipoDocumentoRoutes);
 

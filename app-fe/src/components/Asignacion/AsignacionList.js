@@ -3,10 +3,11 @@ import CardAll from "../Contenedores/CardAll.js";
 import LoadingBar from "../Inputs/LoadingBar.js";
 import TableData from "../Globales/TableData.js";
 import ContenidoTabla from "./ContenidoTabla.js";
-import { usePersona } from "@/context/Persona.Context.js";
+import { useAsignacion } from "@/context/Asignacion.Context.js";
+import ProgresBar from "../Inputs/ProgresBar.js";
 
 function RevisionList() {
-  const { personas } = usePersona();
+  const { asignaciones } = useAsignacion();
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -14,10 +15,16 @@ function RevisionList() {
   }, []);
 
   const info = async () => {
-    setData(await personas());
+    setData(await asignaciones());
   };
 
-  const cabeceras = ["Nombre", "Opciones"];
+  const cabeceras = [
+    "Numero Identificacion",
+    "Familia",
+    "Tipo Documento",
+    "Opciones",
+  ];
+
   if (data.length === 0) {
     return (
       <>

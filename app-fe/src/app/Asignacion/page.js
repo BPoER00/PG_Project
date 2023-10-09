@@ -1,12 +1,11 @@
 "use client"
-import FamiliaProvider from "@/context/Familia.Context.js";
+import AsignacionProvider from "@/context/Asignacion.Context.js";
 import Default from "@/components/Globales/Default";
-import FamiliaActions from "@/components/Familia/FamiliaActions";
-import { useEffect, useState } from "react";
+import AsignacionActions from "@/components/Asignacion/AsignacionActions.js";
 import ProgresBar from "@/components/Inputs/ProgresBar";
+import { useEffect, useState } from "react";
 
 function page() {
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -18,11 +17,11 @@ function page() {
   }
 
   return (
-    <FamiliaProvider>
+    <AsignacionProvider>
       <Default>
-        <FamiliaActions />
+        <AsignacionActions />
       </Default>
-    </FamiliaProvider>
+    </AsignacionProvider>
   );
 }
 

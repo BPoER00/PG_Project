@@ -5,7 +5,6 @@ const familiaSchema = new Schema(
     nombre: {
       type: String,
       required: true,
-      unique: true,
     },
     estado: {
       type: Boolean,

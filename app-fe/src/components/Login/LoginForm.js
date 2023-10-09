@@ -52,6 +52,12 @@ function LoginForm() {
           }}
         >
           <ToastContainer />
+          <button
+            onClick={() => router.push("/Escaneo")}
+            className="fixed top-0 left-0 m-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Escaneo
+          </button>
           <div className="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-w-sm">
             <div className="text-white items-center">
               <div className="mb-8 flex flex-col items-center">

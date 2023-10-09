@@ -2,20 +2,13 @@ import { Schema, model } from "mongoose";
 
 const personaSchema = new Schema(
   {
-    codigoIdentificacion: {
+    nombre: {
       type: String,
       required: true,
-      unique: true,
     },
     familia_id: [
       {
         ref: "Familia",
-        type: Schema.Types.ObjectId,
-      },
-    ],
-    tipoDocumento_id: [
-      {
-        ref: "TipoDocumento",
         type: Schema.Types.ObjectId,
       },
     ],

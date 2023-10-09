@@ -2,8 +2,8 @@ import axios from "axios";
 import { URL_API } from "@/config/props.js";
 import { getCookie } from "@/config/cookiesconfig.js";
 
-const BitacoraApi = axios.create({
-  baseURL: `${URL_API}/bitacora`,
+const AsignacionApi = axios.create({
+  baseURL: `${URL_API}/asignacion`,
   headers: {
     "Content-Type": "application/json",
     "x-access-token": getCookie(),
@@ -11,21 +11,9 @@ const BitacoraApi = axios.create({
 });
 
 export const get = async () => {
-  const res = await BitacoraApi.get("/")
-    .then((data) => {
-      return data.data.data;
-    })
-    .catch((error) => {
-      return error.response;
-    });
-
-  return res;
-};
-
-export const getAsignacionesGroup = async () => {
-  const res = await BitacoraApi.get("/AsignacionesGroup")
-    .then((data) => {
-      return data.data.data;
+  const res = await AsignacionApi.get("/")
+    .then((response) => {
+      return response.data.data;
     })
     .catch((error) => {
       return error.response;
@@ -35,9 +23,9 @@ export const getAsignacionesGroup = async () => {
 };
 
 export const post = async (data) => {
-  const res = await BitacoraApi.post("/", data)
-    .then((data) => {
-      return data;
+  const res = await AsignacionApi.post("/", data)
+    .then((response) => {
+      return response;
     })
     .catch((error) => {
       return error.response;
@@ -46,3 +34,14 @@ export const post = async (data) => {
   return res;
 };
 
+export const remove = async (id) => {
+  const res = await AsignacionApi.delete(`/${id}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+
+  return res;
+};

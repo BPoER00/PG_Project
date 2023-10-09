@@ -1,11 +1,20 @@
+import mongoose from "mongoose";
+import Asignacion from "../Models/Asignacion.js";
 import Persona from "../Models/Persona.js";
 import { ExtractIdToken } from "../Helpers/ExtractIdToken.js";
 
 export const get = async (req, res) => {
   const familia_id = await ExtractIdToken(req.headers["x-access-token"]);
 
-  await Persona.find({ familia_id: familia_id })
-    .populate("familia_id", "nombre")
+  const personas = await Persona.find({ familia_id: familia_id });
+
+  const personaIds = personas.map((persona) => persona._id);
+
+  await Asignacion.find({
+    persona_id: { $in: personaIds },
+  })
+    .populate("persona_id", "nombre")
+    .populate("tipoDocumento_id", "nombre")
     .then((data) => {
       res.status(200).json({
         data: data,
@@ -21,22 +30,20 @@ export const get = async (req, res) => {
 };
 
 export const post = async (req, res) => {
-  const { nombre } = req.body;
+  const { codigoIdentificacion, persona_id, tipoDocumento_id } = req.body;
 
-  const familia_id = await ExtractIdToken(req.headers["x-access-token"]);
-
-  const personaNew = Persona({
-    nombre,
-    familia_id: familia_id,
+  const asignacionNew = Asignacion({
+    codigoIdentificacion,
+    persona_id,
+    tipoDocumento_id,
   });
 
-  await personaNew
+  await asignacionNew
     .save()
-    .then(() => {
+    .then((data) => {
       res.status(204).send();
     })
     .catch((error) => {
-      console.log(error.message);
       res.status(500).json({
         data: null,
         message: `Dato No Fue Creado Correctamente, Error: ${error.message}`,
@@ -47,10 +54,10 @@ export const post = async (req, res) => {
 export const deleted = async (req, res) => {
   const { id } = req.params;
 
-  const persona = await Persona.findById(id);
-  persona.estado = false;
+  const asignacion = await Asignacion.findById(id);
+  asignacion.estado = false;
 
-  await persona
+  await asignacion
     .save()
     .then((data) => {
       res.status(201).json({

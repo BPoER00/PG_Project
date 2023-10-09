@@ -2,9 +2,9 @@ import { Schema, model } from "mongoose";
 
 const bitacoraAccesoSchema = new Schema(
   {
-    persona_id: [
+    asignacion_id: [
       {
-        ref: "Persona",
+        ref: "Asignacion",
         type: Schema.Types.ObjectId,
       },
     ],
